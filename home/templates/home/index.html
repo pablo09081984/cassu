@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cassu</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #2b2e31; 
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        /* CONTENEDOR DEL LOGO */
+        .logo-container {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;    /* ⬅ CENTRADO HORIZONTAL */
+            justify-content: center; /* ⬅ CENTRADO VERTICAL */
+            width: 100%;
+        }
+
+        /* LOGO IMAGEN */
+        .logo-circle img {
+            width: 290px; 
+            height: auto;
+            display: block;
+            margin-left: auto; 
+            margin-right: auto;   /* ⬅ doble centrado por si acaso */
+        }
+
+        /* TEXTO "cassu" */
+        .logo-text {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 70px;
+            font-weight: 600;
+            color: white;
+            margin-top: -10px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 30px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
+        .menu-item {
+            margin-top: 14px;
+            padding: 14px;
+            background-color: #0f5ea8;
+            border-radius: 12px;
+            width: 300px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .menu-item:hover {
+            background-color: #093d6b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGO CENTRADO -->
+    <div class="logo-container">
+        <div class="logo-circle">
+            <img src="{% static 'img/logo_cassu.png' %}" alt="Logo Cassu">
+        </div>
+
+        <div class="logo-text"></div>
+    </div>
+
+    <h1 class="title">Dejá para mañana lo de mañana</h1>
+    <div class="subtitle">Elegí una opción:</div>
+
+    <div style="margin-top: 30px;">
+
+        <div class="menu-item" onclick="location.href='{% url 'pago_diferido' %}'">
+            1 – Pago diferido
+        </div>
+
+        <div class="menu-item" onclick="location.href='{% url 'pago_programado' %}'">
+            2 – Pago con programación de fecha
+        </div>
+
+        <div class="menu-item" onclick="location.href='{% url 'debito' %}'">
+            3 – Débito
+        </div>
+
+        <div class="menu-item" onclick="location.href='{% url 'credito' %}'">
+            4 – Crédito
+        </div>
+
+        <div class="menu-item" onclick="location.href='{% url 'suscripcion' %}'">
+            5 – Asociarme como comensal
+        </div>
+
+        <div class="menu-item" onclick="location.href='{% url 'puntaje' %}'">
+            6 – Puntaje (premios)
+        </div>
+
+    </div>
+
+</body>
+</html>

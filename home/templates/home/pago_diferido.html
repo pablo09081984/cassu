@@ -1,0 +1,196 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cassu - Billeteras Virtuales</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #2b2e31;
+            font-family: "Cormorant Garamond", serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            padding-top: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-circle img { width: 150px; }
+
+        .logo-text { font-size: 46px; margin-top: -8px; }
+
+        .page-card {
+            margin-top: 25px;
+            background-color: #1f2226;
+            padding: 30px 40px;
+            border-radius: 18px;
+            max-width: 650px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.45);
+        }
+
+        .page-card h1 { font-size: 32px; }
+        .page-card p { font-size: 20px; margin-bottom: 10px; }
+
+        .email-info {
+            font-size: 16px;
+            font-style: italic;
+            color: #f0b10b;
+            margin-bottom: 20px;
+        }
+
+        .wallet-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 12px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            width: 100%;
+        }
+
+        .wallet-btn img { width: 40px; }
+
+        /* colores */
+        .mp { background-color: #009ee3; }
+        .uala { background-color: #7a00ff; }
+        .modo { background-color: #00c19b; }
+        .naranjax { background-color: #ff6b00; }
+        .prex { background-color: #0059ff; }
+        .brubank { background-color: #ff00aa; }
+        .personalpay { background-color: #ffcc00; color: black; }
+        .bna { background-color: #004b9b; }
+        .santander { background-color: #ea0000; }
+        .galiciapay { background-color: #ff6600; }
+        .cuentadni { background-color: #00963f; }
+
+        .btn-menu {
+            display: inline-block;
+            color: #e8c15c;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<script>
+    function abrirApp(appUrl, fallback) {
+        window.location.href = appUrl;
+
+        setTimeout(() => {
+            window.location.href = fallback;
+        }, 700);
+    }
+
+    // Recuperar el email guardado desde pago diferido
+    const rawEmail = localStorage.getItem("cassu_email") || "";
+    const email = encodeURIComponent(rawEmail);
+
+    function link(app, web) {
+        const appFinal = app + (email ? "?email=" + email : "");
+        const webFinal = web + (email ? "?email=" + email : "");
+        abrirApp(appFinal, webFinal);
+    }
+
+    // Cuando cargue la página, mostrar el mail si existe
+    document.addEventListener("DOMContentLoaded", () => {
+        const info = document.getElementById("email-info");
+        if (rawEmail && info) {
+            info.textContent = "Estás operando como: " + rawEmail;
+        }
+    });
+</script>
+
+<div class="logo-container">
+    <div class="logo-circle">
+        <img src="{% static 'img/logo_cassu.png' %}">
+    </div>
+    <div class="logo-text">cassu</div>
+</div>
+
+<div class="page-card">
+    <h1>Billeteras virtuales</h1>
+    <p>Elegí tu billetera para continuar con el pago diferido.</p>
+
+    <!-- LEYENDA CON EL MAIL -->
+    <p id="email-info" class="email-info"></p>
+
+    <!-- MercadoPago -->
+    <a onclick="link('mercadopago://home','https://www.mercadopago.com.ar/')" class="wallet-btn mp">
+        <img src="{% static 'img/billeteras/mp.png' %}"> MercadoPago
+    </a>
+
+    <!-- Ualá -->
+    <a onclick="link('uala://home','https://www.uala.com.ar/')" class="wallet-btn uala">
+        <img src="{% static 'img/billeteras/uala.png' %}"> Ualá
+    </a>
+
+    <!-- MODO -->
+    <a onclick="link('modo://home','https://www.modo.com.ar/')" class="wallet-btn modo">
+        <img src="{% static 'img/billeteras/modo.png' %}"> MODO
+    </a>
+
+    <!-- Naranja X -->
+    <a onclick="link('naranjax://home','https://www.naranjax.com/')" class="wallet-btn naranjax">
+        <img src="{% static 'img/billeteras/naranjax.png' %}"> Naranja X
+    </a>
+
+    <!-- Prex (solo web, con email en query string si querés usarlo después) -->
+    <a href="https://www.prexcard.com/{{ email }}" target="_blank" class="wallet-btn prex">
+        <img src="{% static 'img/billeteras/prex.png' %}"> Prex
+    </a>
+
+    <!-- Brubank -->
+    <a onclick="link('brubank://home','https://www.brubank.com')" class="wallet-btn brubank">
+        <img src="{% static 'img/billeteras/brubank.png' %}"> Brubank
+    </a>
+
+    <!-- Personal Pay -->
+    <a onclick="link('personalpay://home','https://www.personalpay.com.ar')" class="wallet-btn personalpay">
+        <img src="{% static 'img/billeteras/personalpay.png' %}"> Personal Pay
+    </a>
+
+    <!-- BNA+ -->
+    <a onclick="link('bna://home','https://www.bna.com.ar')" class="wallet-btn bna">
+        <img src="{% static 'img/billeteras/bna.png' %}"> BNA+
+    </a>
+
+    <!-- Santander Tap -->
+    <a onclick="link('santander://home','https://www.santander.com.ar')" class="wallet-btn santander">
+        <img src="{% static 'img/billeteras/santander.png' %}"> Santander Tap
+    </a>
+
+    <!-- Galicia Pay -->
+    <a onclick="link('galiciapay://home','https://www.bancogalicia.com.ar')" class="wallet-btn galiciapay">
+        <img src="{% static 'img/billeteras/galiciapay.png' %}"> Galicia Pay
+    </a>
+
+    <!-- Cuenta DNI (solo web, también podría recibir email por query) -->
+    <a href="https://www.cuentadni.com.ar/" target="_blank" class="wallet-btn cuentadni">
+        <img src="{% static 'img/billeteras/cuentadni.png' %}"> Cuenta DNI
+    </a>
+
+    <a href="{% url 'index' %}" class="btn-menu">← Volver al menú</a>
+</div>
+
+</body>
+</html>

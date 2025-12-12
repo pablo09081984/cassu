@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cassu</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #030000;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .logo-circle img {
+            width: 180px;
+            height: auto;
+        }
+
+        .title {
+            font-size: 32px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .select-wrapper {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .menu-item {
+            margin-top: 12px;
+            padding: 12px;
+            background-color: #004080;
+            border-radius: 8px;
+            width: 280px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu-item:hover {
+            background-color: #0066cc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+
+        <!-- LOGO -->
+        <div class="logo-circle">
+            <img src="{% static 'img/logo_cassu.png' %}" alt="Logo Cassu">
+        </div>
+
+        <h1 class="title">Dejá para mañana lo de mañana</h1>
+        <div class="select-wrapper">
+           
+            </select>
+            <div class="menu-item" onclick="location.href='pago diferido'">1 – Pago diferido</div>
+            <div class="menu-item" onclick="location.href='pago programado'">2 – Pago con programación de fecha</div>
+            <div class="menu-item" onclick="location.href='debito'">3 – Débito</div>
+            <div class="menu-item" onclick="location.href='credito'">4 – Crédito</div>
+            <div class="menu-item" onclick="location.href='suscripcion'">5 – Asociarme como comensal</div>
+            <div class="menu-item" onclick="location.href='puntaje'">6 – Puntaje (premios)</div>
+            
+
+            
+            
+        </div>
+    </div>
+
+    <script>
+        function handleChange() {
+            const url = document.getElementById('opcion_pago').value;
+            if (url) {
+                window.location.href = url;
+            }
+        }
+        </script>
+        
+  
+    
+       
+</body>
+</html>
